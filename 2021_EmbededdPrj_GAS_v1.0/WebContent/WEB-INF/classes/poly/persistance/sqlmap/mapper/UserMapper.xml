@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="poly.persistance.mapper.IUserMapper">
+	<!-- 유저 정보 찾아서 비밀번호 변경하기 -->
+	<update id="updateAdminInfo" parameterType="UserDTO">
+		UPDATE 
+			USER_INFO
+		SET 
+			PWD=#{pwd}
+		WHERE 
+			EMPNO = #{empno}
+	
+	</update>
+
+	<!-- 회원 가입 -->
+	<insert id="insertUserInfo" parameterType="UserDTO">
+		INSERT 
+		       INTO USER_INFO
+		VALUES(
+			#{empno}, 
+			#{pwd},
+			#{name}, 
+			#{email},
+			#{phone}
+		)
+	</insert>
+
+	<!-- 비번 분싪 시 유저 정보 찾기 이메일 -->
+	<select id="getFindUserInfo" resultType="UserDTO">
+		SELECT
+			EMAIL,
+			NAME,
+			EMPNO
+		FROM 
+			USER_INFO
+		WHERE 
+			EMAIL=#{email}
+	</select>
+	<!-- getEmailCheck -->
+	<select id="getEmailCheck" resultType="UserDTO">
+		SELECT 
+			EMAIL
+		FROM
+			USER_INFO
+		WHERE
+			EMAIL=#{email}
+	</select>
+	
+	<!-- 아작스로 로그인 확인 -->
+	<select id="getEmpnoCheck" resultType="UserDTO">
+		SELECT 
+			EMPNO
+		FROM
+			USER_INFO
+		WHERE
+			EMPNO=#{empno}
+	</select>
+
+		<!-- 아이디 비밀번호  -->
+	<select id="getLoginInfo" resultType="UserDTO">
+		SELECT 
+			EMPNO, 
+			PWD, 
+			NAME, 
+			EMAIL,
+			PHONE 
+		FROM 
+			USER_INFO
+		WHERE 
+			EMPNO=#{empno} AND PWD=#{pwd}
+	</select>
+	
+	<select id="kakaoLoginForDgService" resultType="KakaoDTO">
+		SELECT  
+			EMPNO, 
+			PWD, 
+			NAME 
+		FROM 
+			USER_INFO
+		WHERE 
+			EMAIL=#{kakaoMeail}
+	</select>
+</mapper>
