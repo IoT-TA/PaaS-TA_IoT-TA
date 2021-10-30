@@ -1,6 +1,7 @@
 # PaaS-TA_IoT-TA
 ### Config Repository : [PaaS-TA_IoT-TA(Private)](https://github.com/senor14/PaaS-TA_IoT-TA_config)
-### Wiki : [WIKI](https://github.com/IoT-TA/PaaS-TA_IoT-TA/wiki/%F0%9F%93%95-%EC%84%A4%EB%AA%85%EC%84%9C)
+### Wiki : [WIKI](https://github.com/IoT-TA/PaaS-TA_IoT-TA/wiki)
+### 설명서 : [설명서](https://github.com/IoT-TA/PaaS-TA_IoT-TA/wiki/%F0%9F%93%95-%EC%84%A4%EB%AA%85%EC%84%9C)
 #
 
 ### 📒 [개발문서](https://www.notion.so/IoT-TA-71624201a9204f608d0e7bea77766171) (API 설계, DB 설계, 화면 설계, Convention 등)
