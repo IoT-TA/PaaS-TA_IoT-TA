@@ -25,14 +25,14 @@
 ### **📌 기술 스택**
 
 - Software Tool
-    - IDE : Eclipse, STS, VS Code, Arduino Sketch
-    - Database Tool : Studio 3T, MySQL Workbench 8.0 CE
-    - API : Postman
-    - Server : PuTTY, WinSCP
-    - 형상관리 : Github, Git bash
-    - 소통 : Slack, GatherTown
-    - 브라우저 : Chrome
-    - 기타 : Atom, Hancom Office(2016이상)
+    - **IDE** : Eclipse, STS, VS Code, Arduino Sketch
+    - **Database Tool** : Studio 3T, MySQL Workbench 8.0 CE
+    - **API** : Postman
+    - **Server** : PuTTY, WinSCP
+    - **형상관리** : Git, Github
+    - **소통** : Slack, GatherTown
+    - **브라우저** : Chrome
+    - **기타** : Atom, Hancom Office(2016이상)
 - Hardware
     - Arduino Uno Board
     - MQ2, MQ4 Gas sensor(실험에는 CO2 센서사용)
