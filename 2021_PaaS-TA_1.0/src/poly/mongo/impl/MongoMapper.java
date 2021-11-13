@@ -136,7 +136,7 @@ public class MongoMapper implements IMongoMapper {
 			int sNum = 1;
 			Iterator<MongoDTO> it = pList.iterator();
 			while (it.hasNext()) {
-				//log.info(it.next());
+				log.info(it.next());
 				query = new BasicDBObject();
 				String str = sNum + ""; // 형변환
 				query.put("date", sensorMap.get(str));
