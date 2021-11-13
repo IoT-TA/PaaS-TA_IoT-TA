@@ -1,0 +1,98 @@
+{
+  "name": "eslint-bridge",
+  "version": "1.0.0",
+  "description": "bridge between SonarJS and ESLint",
+  "scripts": {
+    "build": "yarn install && yarn check-format && yarn clear && yarn compile",
+    "clear": "tsc -b src tests --clean",
+    "check-format": "prettier --list-different \"{src,tests}/**/!(*.lint).ts\"",
+    "test": "jest",
+    "format": "prettier --write \"{src,tests}/**/!(*.lint).ts\"",
+    "compile": "tsc -b src tests",
+    "jar": "npm pack && mkdirp target/classes && mv eslint-bridge-1.0.0.tgz target/classes",
+    "new-rule": "ts-node tools/newRule.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SonarSource/SonarJS.git"
+  },
+  "license": "LGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/SonarSource/SonarJS/issues"
+  },
+  "homepage": "https://github.com/SonarSource/SonarJS#readme",
+  "engines": {
+    "node": ">=10"
+  },
+  "devDependencies": {
+    "@types/bytes": "3.1.0",
+    "@types/eslint": "7.28.0",
+    "@types/eslint-scope": "3.7.1",
+    "@types/estree": "0.0.50",
+    "@types/express": "4.17.11",
+    "@types/functional-red-black-tree": "1.0.1",
+    "@types/jest": "26.0.22",
+    "@types/node": "14.14.41",
+    "jest": "26.6.3",
+    "jest-sonar-reporter": "1.3.0",
+    "mkdirp": "1.0.4",
+    "prettier": "2.2.1",
+    "ts-jest": "26.5.5",
+    "ts-node": "9.1.1"
+  },
+  "dependencies": {
+    "@babel/core": "7.15.0",
+    "@babel/eslint-parser": "7.15.0",
+    "@babel/preset-env": "7.15.0",
+    "@babel/preset-flow": "7.14.5",
+    "@babel/preset-react": "7.14.5",
+    "@typescript-eslint/eslint-plugin": "4.29.1",
+    "@typescript-eslint/experimental-utils": "4.29.1",
+    "@typescript-eslint/parser": "4.29.1",
+    "builtin-modules": "3.2.0",
+    "bytes": "3.1.0",
+    "eslint": "7.32.0",
+    "eslint-plugin-chai-friendly": "0.7.2",
+    "eslint-plugin-sonarjs": "0.10.0",
+    "express": "4.17.1",
+    "functional-red-black-tree": "1.0.1",
+    "regexpp": "3.2.0",
+    "run-node": "2.0.0",
+    "scslre": "0.1.6",
+    "typescript": "4.3.5",
+    "vue-eslint-parser": "7.6.0"
+  },
+  "bundledDependencies": [
+    "@typescript-eslint/eslint-plugin",
+    "@typescript-eslint/experimental-utils",
+    "@typescript-eslint/parser",
+    "@babel/core",
+    "@babel/eslint-parser",
+    "@babel/preset-env",
+    "@babel/preset-flow",
+    "@babel/preset-react",
+    "builtin-modules",
+    "bytes",
+    "eslint",
+    "eslint-plugin-chai-friendly",
+    "eslint-plugin-sonarjs",
+    "express",
+    "functional-red-black-tree",
+    "regexpp",
+    "run-node",
+    "scslre",
+    "vue-eslint-parser",
+    "typescript"
+  ],
+  "prettier": {
+    "printWidth": 100,
+    "trailingComma": "all",
+    "singleQuote": true,
+    "arrowParens": "avoid",
+    "endOfLine": "lf"
+  },
+  "files": [
+    "lib/",
+    "bin/"
+  ]
+}

@@ -1,11 +1,16 @@
 package poly.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -107,6 +112,9 @@ public class UserController {
 			//----------------------------------차후 유효성 검사를 위해 세션에 값을 추가해줌--------------------------------------
 			session.setAttribute("id", uDTO.getEmpno());
 			session.setAttribute("name", uDTO.getName());
+			
+			// MINUTES_LINE을 가져오기 위해 session에 email 저장
+			session.setAttribute("email", uDTO.getEmail());
 		}
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
@@ -318,4 +326,38 @@ public class UserController {
 		return "user/redirect";
 	}
 	//--------------------------------------------------------------추가?
+	
+	
+	// 사용자 이메일로 minutesLine 조회
+	@RequestMapping(value="/user/getMinutesLineByEmail")
+	public ResponseEntity<List<Integer>> getMinutesLineByEmail(HttpSession session) {
+		log.info(this.getClass().getName()+"-----------------------------------getMinutesLineByEmail start!!-----------------------------------------");
+		
+		List<Integer> minutes = new ArrayList<>();
+		
+		UserDTO pDTO = new UserDTO();
+		pDTO.setEmail((String)session.getAttribute("email"));
+		UserDTO rDTO = userService.getMinutesLineByEmail(pDTO);
+		String[] split = rDTO.getMinutesLine().split(" ");
+		for (String s : split) {
+			minutes.add(Integer.parseInt(s));
+		}
+		log.info("minutes : "+minutes);
+		
+		log.info(this.getClass().getName()+"----------------------------------getMinutesLineByEmail end!!-----------------------------");
+		return ResponseEntity.status(HttpStatus.OK).body(minutes);
+	}
+	
+	// 사용자의 minutesLine 수정 
+	@RequestMapping(value="/user/updateMinutesLine")
+	public ResponseEntity<Integer> updateMinutesLine(HttpServletRequest request) {
+		log.info(this.getClass().getName()+"-----------------------------------updateMinutesLine start!!-----------------------------------------");
+		
+		UserDTO pDTO = new UserDTO();
+		pDTO.setMinutesLine(CmmUtil.nvl(request.getParameter("minutesLine")));
+		int res = userService.updateMinutesLine(pDTO);
+		
+		log.info(this.getClass().getName()+"----------------------------------updateMinutesLine end!!-----------------------------");
+		return ResponseEntity.status(HttpStatus.OK).body(res);
+	}
 }
