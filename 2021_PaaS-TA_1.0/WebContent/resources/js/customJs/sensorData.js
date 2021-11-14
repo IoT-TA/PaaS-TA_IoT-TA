@@ -16,11 +16,14 @@
 //	const realTimeSetingFromMongo = 5000; // => 몽고에서 데이터 가져올 시간 설정(밀리세컨즈 1000 == 1초)
 	const realTimeSetingFromMongo = 20000; // => 몽고에서 데이터 가져올 시간 설정(밀리세컨즈 1000 == 1초)
 	const limit = 250; // => 임계값 설정하는 변수
+	let countData = {};
 	
    //---------------------------------------------몽고 데이터 불러오기(메인 컨트롤러)------------------------------------------
 	$(document).ready(()=>
 	{	// parameter 정보 : p1 : 몽고에서 센서 정보 가져오기, p2 : fan 동작 컨트롤
+		initSensorData(changeFan);
 	    realTimeGetSensorData(initSensorData, changeFan);
+		
 	})
 	//-----------------------------재귀호출을 하여 정한 시간마다 센서 데이터 가져오는 함수-------------------------------------
 	function realTimeGetSensorData(initSensorData, changeFan)
@@ -28,6 +31,7 @@
 		setTimeout(()=>{
 			console.log("------------------------------------------------");
 			initSensorData(changeFan);
+			getUserInfo();
 			return realTimeGetSensorData(initSensorData, changeFan);
 		}, realTimeSetingFromMongo);
 	}
@@ -59,21 +63,27 @@
 		{
 			sensorArr.push(data[key]); // => 객체 크기 만큼 배열에 값을 넣음
 		}	    
+		if ((+sensorArr[0]+ +sensorArr[1])/2 >= limit) {
+			$('#myModal').show();
+		} 
+		/*
 		sensorArr.forEach(sensorData => {
 			   if(sensorData <= limit){ // => 임계값 이상일시 모달을 띄움
 			     	$('#myModal').show();
-			   } /*else { console.log( sensorData + " 번 이상없음, 가스 정상") }*/
-	    });
-	   console.log("sensorArr[0] : " + sensorArr[0] + " sensorArr[1] : " + sensorArr[1] + " sensorArr[2] : " + sensorArr[2]); // => 로그 확인용 
-	   //-------------------------------------------팬 이미지 동작을 위한 리턴 값 작업--------------------------------------
-/*	   for(let i = 0; i < sensorArr.length; i++) => 리팩토링 작업 중 중단
-	   {
-			if(sensorArr[i] >= limit){
-				successNum = 1;
-			} else { successNum = 0; }
-	   }*/
-	   if(sensorArr[0] <= limit || sensorArr[1] <= limit || sensorArr[2] <= limit){successNum = 1;}
-	   else{successNum = 0;}
+			   } //else { console.log( sensorData + " 번 이상없음, 가스 정상") }
+	    });*/
+	   console.log("sensorArr[0] : " + +sensorArr[0] + " sensorArr[1] : " + +sensorArr[1] + " sensorArr[2] : " + sensorArr[2]); // => 로그 확인용
+		console.log("data[mqttNum] = "+ data['mqttNum'])
+		console.log("fanStartTime : "+ data['fanStartTime'])
+		console.log("fanStopTime : "+ data['fanStopTime'])
+		console.log("minutesCycle : "+ data['minutesCycle'])
+		countData.fanStartTime = data['fanStartTime'];
+		countData.fanStopTime = data['fanStopTime'];
+		countData.minutesCycle = data['minutesCycle'];
+		
+//	   if(sensorArr[0] <= limit || sensorArr[1] <= limit || sensorArr[2] <= limit){successNum = 1;}
+	   if((+sensorArr[0]+ +sensorArr[1])/2 >= limit || data['mqttNum']==1) successNum = 1;
+	   else successNum = 0;
 		return successNum;
 	}
     //---------------------------------------------------모달 팝업 Close 기능-----------------------------------------------
@@ -90,3 +100,63 @@
     		$("#fanImg").attr("src", "/resources/img/stopped-fan.png");
     	}
     }
+//-----------------------------------------------다음 가동ㅋ-카운트 다운-----------------------------------------------------------
+/*	function countDownFunc() {
+	(function () {
+  const second = 1000,
+    minute = second * 60,
+    hour = minute * 60,
+    day = hour * 24;
+
+  //I'm adding this section so I don't have to keep updating this pen every year :-)
+  //remove this if you don't need it
+
+	console.log("countData['minutesCycle'] : "+ countData["minutesCycle"])
+	console.log("countData[''fanStopTime''] : "+ countData["fanStopTime"])
+
+  let today = new Date(),
+    dd = String(today.getDate()).padStart(2, "0"),
+    mm = String(today.getMonth() + 1).padStart(2, "0"),
+    yyyy = today.getFullYear(),
+    h = Math.floor((+countData["fanStopTime"] + +countData["minutesCycle"]) / 60),
+  	m = (+countData["fanStopTime"] + +countData["minutesCycle"]) % 60;
+	
+	console.log("h : "+h);
+	console.log("m : "+m);
+  //today = mm + "/" + dd + "/" + yyyy;
+  //if (today > birthday) {
+  //  birthday = dayMonth + nextYear;
+  //}
+  //end
+  if(countData['fanStopTime']) {
+  const countDown = new Date(yyyy, mm, dd, h, m).getTime(),
+    x = setInterval(function () {
+      const now = new Date().getTime(),
+        distance = countDown - now;
+
+      // (document.getElementById("days").innerText = Math.floor(distance / day)),
+      (document.getElementById("hours").innerText = Math.floor(
+        (distance % day) / hour
+      )),
+        (document.getElementById("minutes").innerText = Math.floor(
+          (distance % hour) / minute
+        ));
+      // (document.getElementById("seconds").innerText = Math.floor(
+      //   (distance % minute) / second
+      // ));
+
+      //do something later when date is reached
+      if (distance < 0) {
+        //   document.getElementById("headline").innerText = "It's my birthday!";
+        //   document.getElementById("countdown").style.display = "none";
+        //   document.getElementById("content").style.display = "block";
+        clearInterval(x);
+      }
+      //seconds
+    }, 0);
+	} else {
+		(document.getElementById("hours").innerText = 0),
+        (document.getElementById("minutes").innerText = 0);
+	}
+})(); }
+	*/	

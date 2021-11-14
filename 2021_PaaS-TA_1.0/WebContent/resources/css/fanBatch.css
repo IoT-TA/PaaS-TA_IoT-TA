@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Dongle:wght@300&family=Lora:wght@600&display=swap');
+
+#fanBatch {
+	display: flex;
+	justify-content: end;
+}
+
+#fan__data {
+	height: 70%;
+    margin-top: 30px;
+}
+
+.fan__input {
+	margin-top: 50px;
+}
+
+.modal_body {
+	color: #4167d5;
+	font-family: 'Dongle', sans-serif;
+	font-size: 25px;
+	
+}
+#fan__buttons {
+	color: #4167d5;
+	background-color: white;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.fan__button {
+	background-color: white;
+    color: #4167d5;
+    border-color: #4167d5;
+}
+.fan__explanation {
+	color: grey;
+}

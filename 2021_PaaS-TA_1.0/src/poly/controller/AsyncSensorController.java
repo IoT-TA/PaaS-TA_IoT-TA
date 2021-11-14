@@ -96,6 +96,7 @@ public class AsyncSensorController {
 			}
 			// -----------------------------------------------------------------------------------------------------------------------------
 			cnt++;
+			if (cnt == 3) break;
 		}
 		// --------------------------------------------------------------------------------------------------------------------------------
 		int indexNum = 0;
@@ -124,6 +125,7 @@ public class AsyncSensorController {
 		int minutesCycle = Integer.parseInt(split[0]); // 환풍기 배치 순환주기
 		int uptime = Integer.parseInt(split[1]); // 환풍기 가동시간
 		Calendar cal = Calendar.getInstance();
+		
 		int currentHour = cal.get(Calendar.HOUR_OF_DAY);
 		int currentMinute = cal.get(Calendar.MINUTE);
 		int currentHourMinute = currentHour * 60 + currentMinute;
@@ -133,14 +135,14 @@ public class AsyncSensorController {
 		int stopDiff = currentHourMinute - fanStopTime;
 		if (stopDiff < 0) startDiff += 24*60;
 
-//		log.info("fanStartTime : "+fanStartTime);
-//		log.info("fanStopTime : "+fanStopTime);
-//		log.info("currentHourMinute : "+currentHourMinute);
-//		log.info("startDiff : "+startDiff);
-//		log.info("stopDiff : "+stopDiff);
-//		log.info("operationFlag : "+operationFlag);
-//		log.info("currentHour : "+currentHour);
-//		log.info("currentMinute : "+currentMinute);
+		log.info("fanStartTime : "+fanStartTime);
+		log.info("fanStopTime : "+fanStopTime);
+		log.info("currentHourMinute : "+currentHourMinute);
+		log.info("startDiff : "+startDiff);
+		log.info("stopDiff : "+stopDiff);
+		log.info("operationFlag : "+operationFlag);
+		log.info("currentHour : "+currentHour);
+		log.info("currentMinute : "+currentMinute);
 		
 		if (operationFlag) {
 			if (avgCO2 > LIMIT) {
@@ -152,6 +154,7 @@ public class AsyncSensorController {
 				operationFlag = false;
 				fanStartTime = 0;
 				fanStopTime = currentHourMinute;
+				log.info("11111111111111111");
 			}
 		} else {
 			if (avgCO2 > LIMIT) {
@@ -175,7 +178,10 @@ public class AsyncSensorController {
 				}
 			}
 		}
-
+		sensorObj.put("fanStartTime", fanStartTime+"");
+		sensorObj.put("fanStopTime", fanStopTime+"");
+		sensorObj.put("mqttNum", mqttNum+"");
+		sensorObj.put("minutesCycle", minutesCycle);
 //		if (resNumArr[0] < limit || resNumArr[1] < limit || resNumArr[2] < limit) {
 //			++mqttNum;
 //			log.info("------------------------------------------mqttNum------------------------------------------ : " + mqttNum);

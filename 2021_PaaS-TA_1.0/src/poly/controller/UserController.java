@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import poly.dto.MailDTO;
@@ -82,18 +83,20 @@ public class UserController {
 	@RequestMapping(value="user/userLoginProc")
 	public String userLoginProc(HttpServletRequest request, ModelMap model, HttpSession session) throws Exception{
 		log.info(this.getClass() + "--------------------------------user/userLoginProc start!!----------------------------------");
-		String empno = CmmUtil.nvl(request.getParameter("empno"));
+		String empno = CmmUtil.nvl(request.getParameter("empno")).trim();
 		log.info("empno: " + empno);
-		String pwd = CmmUtil.nvl(EncryptUtil.encHashSHA256(request.getParameter("pwd")));	
+		String pwd = CmmUtil.nvl(EncryptUtil.encHashSHA256(request.getParameter("pwd"))).trim ();	
 		log.info("pwd: " + pwd);
 		//-----------------------------------------------------로그인 처리 로직-------------------------------------------------
 		UserDTO uDTO;
 		uDTO = new UserDTO(); 
 		uDTO.setEmpno(empno);	
-		uDTO.setPwd(pwd);
+		uDTO.setPwd(pwd); 
 		log.info("empno2 : " + empno);
 		log.info("pwd2 : " + pwd);
-		uDTO = userService.getLoginInfo(uDTO); 
+		log.info("uDTO : "+uDTO);
+		uDTO = userService.getLoginInfo(uDTO);
+		log.info("uDTO : "+uDTO);
 		uDTO.setEmpno(empno); 
 		uDTO.setPwd(pwd); 
 		//---------------------------------------------로그인 성공 유무에 따른 메시지와 경로 리턴 로직---------------------------
@@ -349,13 +352,18 @@ public class UserController {
 	}
 	
 	// 사용자의 minutesLine 수정 
-	@RequestMapping(value="/user/updateMinutesLine")
-	public ResponseEntity<Integer> updateMinutesLine(HttpServletRequest request) {
+	@RequestMapping(value="/user/updateMinutesLine", method = RequestMethod.POST)
+	public ResponseEntity<Integer> updateMinutesLine(HttpServletRequest request, HttpSession session) {
 		log.info(this.getClass().getName()+"-----------------------------------updateMinutesLine start!!-----------------------------------------");
+		
+		log.info("minutesLine : "+request.getParameter("minutesLine"));
 		
 		UserDTO pDTO = new UserDTO();
 		pDTO.setMinutesLine(CmmUtil.nvl(request.getParameter("minutesLine")));
+		pDTO.setEmail((String)session.getAttribute("email"));
+		log.info("pDTO : "+pDTO);
 		int res = userService.updateMinutesLine(pDTO);
+		
 		
 		log.info(this.getClass().getName()+"----------------------------------updateMinutesLine end!!-----------------------------");
 		return ResponseEntity.status(HttpStatus.OK).body(res);
