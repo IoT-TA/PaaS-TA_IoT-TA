@@ -67,7 +67,7 @@
 				var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
 				var temp = JSON.parse(localStorage.getItem("sensorOBJ"));
 				let limitValueFotChart = temp["limitValue"];
-				valueAxis.title.text = `가스지수(${limitValueFotChart})`;
+				valueAxis.title.text = `CO2농도(${limitValueFotChart})`;
 				valueAxis.tooltip.disabled = true;
 				valueAxis.interpolationDuration = 500;
 				valueAxis.rangeChangeDuration = 500;
