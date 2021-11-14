@@ -82,20 +82,16 @@ public class UserController {
 	@RequestMapping(value="user/userLoginProc")
 	public String userLoginProc(HttpServletRequest request, ModelMap model, HttpSession session) throws Exception{
 		log.info(this.getClass() + "--------------------------------user/userLoginProc start!!----------------------------------");
-		String empno = CmmUtil.nvl(request.getParameter("empno"));
-		log.info("empno: " + empno);
+		String email = CmmUtil.nvl(request.getParameter("loginEmail"));
+		log.info("email: " + email);
 		String pwd = CmmUtil.nvl(EncryptUtil.encHashSHA256(request.getParameter("pwd")));	
 		log.info("pwd: " + pwd);
 		//-----------------------------------------------------로그인 처리 로직-------------------------------------------------
 		UserDTO uDTO;
 		uDTO = new UserDTO(); 
-		uDTO.setEmpno(empno);	
+		uDTO.setEmail(email);
 		uDTO.setPwd(pwd);
-		log.info("empno2 : " + empno);
-		log.info("pwd2 : " + pwd);
 		uDTO = userService.getLoginInfo(uDTO); 
-		uDTO.setEmpno(empno); 
-		uDTO.setPwd(pwd); 
 		//---------------------------------------------로그인 성공 유무에 따른 메시지와 경로 리턴 로직---------------------------
 		String msg = "";
 		String url = "";
@@ -103,22 +99,20 @@ public class UserController {
 			msg = "로그인 실패";
 			url = "/user/userLogin.do";
 		} else {
-			log.info("uDTO ID : " + uDTO.getEmpno());
+			log.info("uDTO Email : " + uDTO.getEmail());
 			log.info("uDTO PWD : " + uDTO.getPwd());
 			log.info("uDTO NAME : " + uDTO.getName());
 
 			msg = "로그인 성공";
 			url = "/main/index.do";
 			//----------------------------------차후 유효성 검사를 위해 세션에 값을 추가해줌--------------------------------------
-			session.setAttribute("id", uDTO.getEmpno());
 			session.setAttribute("name", uDTO.getName());
-			
 			// MINUTES_LINE을 가져오기 위해 session에 email 저장
 			session.setAttribute("email", uDTO.getEmail());
 		}
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
-
+		uDTO = null;
 		log.info(this.getClass() + "---------------------------------------user/userLoginProc END!!---------------------------------");
 		return "/user/redirect";
 	}
@@ -169,10 +163,10 @@ public class UserController {
 	@ResponseBody
 	public int userLoginEmpnoCheck(HttpServletRequest request, ModelMap model) throws Exception {
 		log.info(this.getClass().getName() + "-------------------------------------user/loginEmailCheck Start!!----------------------");
-		String empno = CmmUtil.nvl(request.getParameter("empno"));
-		log.info("empno : " + empno);
+		String email = CmmUtil.nvl(request.getParameter("email"));
+		log.info("email : " + email);
 
-		int res = userService.getEmpnoCheck(empno);
+		int res = userService.getEmpnoCheck(email);
 		log.info("res : " + res); //res 값을 확인
 
 		log.info(this.getClass().getName() + "-------------------------------user/loginEmailCheck End!!--------------------------------");
@@ -216,31 +210,25 @@ public class UserController {
 		int res = 0; // 데이터 들어갔나 확인용
 		//------------------------------------------------------HttpServ에서 값을 가져오는 부분-----------------------------------------
 		// null 확인을 하고, 민감한 정보는 암호화 하였음
-		String empno = CmmUtil.nvl(request.getParameter("empno"));
-		String name = CmmUtil.nvl(request.getParameter("name"));
-		String password = CmmUtil.nvl(EncryptUtil.encHashSHA256(request.getParameter("password"))); 
 		String email = CmmUtil.nvl(request.getParameter("email"));
-		String phone = CmmUtil.nvl(request.getParameter("phone"));
+		String password = CmmUtil.nvl(EncryptUtil.encHashSHA256(request.getParameter("password"))); 
+		String name = CmmUtil.nvl(request.getParameter("name"));
 		//------------------------------------------------------------------------------------------------------------------------------
-		log.info("empno : " + empno);
-		log.info("name : " + name);
-		log.info("password : " + password);
 		log.info("email : " + email);
-		log.info("phone : " + phone); 
+		log.info("password : " + password);
+		log.info("name : " + name); 
 		//-------------------------------------------------DTO에 모아서 DB로 저장시키기 위한 작업---------------------------------------
 		pDTO = new UserDTO();
-		pDTO.setEmpno(empno);
-		pDTO.setName(name);
 		pDTO.setEmail(email);
 		pDTO.setPwd(password);
-		pDTO.setPhone(phone);
+		pDTO.setName(name);
 		res = userService.insertUserInfo(pDTO); // DB저장을 위한 서비스 호출
 		//------------------------------------------------------------------------------------------------------------------------------
 		log.info("res 0이면 문제 발생 : " + res); 
 		if (res == 1) { // 리턴 값이 1이면 성공이기 때문에 실행
 			msg = "회원가입이 완료되었습니다.";
 			url = "/user/userLogin.do";
-			log.info("가입자 이름은 : " + pDTO.getName());
+			log.info("가입자 이름은 : " + pDTO.getEmail());
 		} else { // 실패하면 실행
 			msg = "가입 실패";
 			url = "/user/regAdmin.do";
@@ -257,7 +245,7 @@ public class UserController {
 		log.info("--------------------------------------changePasswordPage Start-------------------------");
 		session.invalidate(); // 세션 정보 초기화
 		String email = CmmUtil.nvl(request.getParameter("email"));	//이메일 정보를 받아옴
-		String title = "GASGASGAS 관리자 입니다."; 
+		String title = "IoT-TA 관리자 입니다."; 
 		//----------------------------------------------------------메일발송 로직 작성---------------------------------------------------
 		@SuppressWarnings("unused")
 		int res = 0;
@@ -266,7 +254,6 @@ public class UserController {
 			rDTO.setEmail(email);//rDTO에 파라미터로 받은 이메일 던져줌
 			rDTO = userService.getFindUserInfo(rDTO);	
 			String emailForDB = rDTO.getName();
-			String empnoForDB = rDTO.getEmpno();
 
 			if (emailForDB == null) { 
 				log.info("가입된 회원정보가 없습니다.");
@@ -290,7 +277,6 @@ public class UserController {
 				session = request.getSession();
 				session.setAttribute("random", random); //세션이 랜덤값 저장해서, 확인을 위함
 				session.setAttribute("sessionEmail", email);
-				session.setAttribute("empno", empnoForDB);
 			}
 		}
 		log.info("-----------------------------changePasswordPage END----------------------");
@@ -306,7 +292,6 @@ public class UserController {
 		log.info("password : " + password);
 		//--------------------------------------------------DB 저장을 위한 DTO 선언과 값 저장------------------------------------------
 		UserDTO pDTO = new UserDTO();
-		pDTO.setEmpno(empno);
 		pDTO.setPwd(password);
 		//-----------------------------------------------------------------------------------------------------------------------------
 		int success = userService.updateAdminInfo(pDTO);//pDTO값을 updateAdminInfo에 넣어서 userService로 보낸다.

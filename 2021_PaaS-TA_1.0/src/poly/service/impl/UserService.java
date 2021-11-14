@@ -39,10 +39,10 @@ public class UserService implements IUserService{
 	}
 	//------------------------------------------아작스 호출 되는 로직-----------------------------------------------------
 	@Override
-	public int getEmpnoCheck(String empno) {
+	public int getEmpnoCheck(String email) {
 		int res = 0;
 		UserDTO pDTO = new UserDTO(); 
-		pDTO.setEmpno(empno); 
+		pDTO.setEmail(email); 
 		UserDTO rDTO = new UserDTO(); 
 		rDTO = userMapper.getEmpnoCheck(pDTO); 
 		if(rDTO != null) { 

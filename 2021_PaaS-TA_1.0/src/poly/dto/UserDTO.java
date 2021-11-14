@@ -13,30 +13,16 @@ package poly.dto;
 public class UserDTO { // => 클래스 이름이 mapper.xml의 resulttype 임
 	// private Logger log = Logger.getLogger(this.getClass()); // DTO에 에러 있나 확인용
 	//-------------------------------------변수 선언 부--------------------------------------
-	private String empno; // => 아이디	
-	private String pwd;   // => 비번
-	private String name;  // => 이름
 	private String email; // => 이메일
-	private String phone; // => 연락처
+	private String pwd;   // => 비번
+	private String name; // => 연락처
 	private String minutesLine; // => '순환주기(분) 가동시간(분)'  
 	//---------------------------------Get, Set ----------------------------------------------
-	public String getEmpno() {
-		return empno;
-	}
-	public void setEmpno(String empno) {
-		this.empno = empno;
-	}
 	public String getPwd() {
 		return pwd;
 	}
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
 	}
 	public String getEmail() {
 		return email;
@@ -44,22 +30,17 @@ public class UserDTO { // => 클래스 이름이 mapper.xml의 resulttype 임
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPhone() {
-		return phone;
+	public String getName() {
+		return name;
 	}
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getMinutesLine() {
 		return minutesLine;
 	}
 	public void setMinutesLine(String minutesLine) {
 		this.minutesLine = minutesLine;
-	}
-	@Override
-	public String toString() {
-		return "UserDTO [empno=" + empno + ", pwd=" + pwd + ", name=" + name + ", email=" + email + ", phone=" + phone
-				+ ", minutesLine=" + minutesLine + "]";
 	}
 	
 }

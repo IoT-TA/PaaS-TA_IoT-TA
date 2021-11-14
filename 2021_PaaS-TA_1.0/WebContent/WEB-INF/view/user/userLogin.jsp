@@ -198,7 +198,7 @@
 
                         <div class="form-group">
 
-                            <input type="text" class="form-control" placeholder="휴대전화번호" required="required" id="phone" name ="phone">
+                            <input type="text" class="form-control" placeholder="사용자이름" required="required" id="name" name ="name">
 
                         </div>
 
@@ -273,7 +273,7 @@
 
                         <div class="form-group">
 
-                            <input type="text" class="form-control" placeholder="비밀번호" required="required" id="loginPassword" name="loginPassword">
+                            <input type="password" class="form-control" placeholder="비밀번호" required="required" id="loginPassword" name="loginPassword">
 
                         </div>
 
@@ -333,9 +333,9 @@
 				f.password.focus();
 				return false;
 			}
-			if (phone.value.trim() = "") {
-				alert("전화번호를 입력해주세요");
-				f.phone.focus();
+			if (name.value.trim() = "") {
+				alert("이름을 입력해주세요");
+				f.name.focus();
 				return false;
 			}
 		}
@@ -343,9 +343,9 @@
 <!-- ====================================== 이메일 등록여부 확인용 아작스 =========================================== -->
    <script type="text/javascript">
    $('#email').blur(function () {
-		var empno = $('#email').val();
+		var email = $('#email').val();
 		$.ajax({
-			url : '/user/loginEmpnoCheck.do?empno=' + empno, // => 여기 이메일로 수정하기
+			url : '/user/loginEmpnoCheck.do?email=' + email, // => 여기 이메일로 수정하기
 			type : 'get',
 			dataType : 'text',
 			success : function (data) {
@@ -369,10 +369,10 @@
    $('#loginEmail').blur(function () // => 제이쿼리 선택이 해제 되면 함수가 동작
 	{
 	  //--------------------id가 empno인 값을 가져와 담는다.------------------------------------ 
-      var empno = $('#loginEmail').val(); // => 컨트롤러로 같이 보낼 데이터
+      var email = $('#loginEmail').val(); // => 컨트롤러로 같이 보낼 데이터
       //----------------------------------------------------------------------------------------
       $.ajax({
-         url : '/user/loginEmpnoCheck.do?empno=' + empno, //=> 이메일로 수정하기
+         url : '/user/loginEmpnoCheck.do?email=' + email, //=> 이메일로 수정하기
          type : 'get',
          dataType : 'text',
          success : function (data) {
