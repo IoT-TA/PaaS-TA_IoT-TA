@@ -9,5 +9,6 @@
 		<typeAlias type="poly.dto.UserDTO" alias="UserDTO"/>
 		<typeAlias type="poly.dto.MailDTO" alias="MailDTO"/>
 		<typeAlias type="poly.dto.KakaoDTO" alias="KakaoDTO"/>
+		<typeAlias type="poly.dto.LimitDTO" alias="LimitDTO"/>
     </typeAliases>    
 </configuration>

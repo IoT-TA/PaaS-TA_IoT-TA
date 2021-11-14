@@ -8,20 +8,18 @@
 		SET 
 			PWD=#{pwd}
 		WHERE 
-			EMPNO = #{empno}
+			EMAIL = #{email}
 	
 	</update>
 
 	<!-- 회원 가입 -->
 	<insert id="insertUserInfo" parameterType="UserDTO">
-		INSERT 
-		       INTO USER_INFO
+		INSERT INTO 
+			USER_INFO
 		VALUES(
-			#{empno}, 
 			#{pwd},
 			#{name}, 
-			#{email},
-			#{phone}
+			#{email}
 		)
 	</insert>
 
@@ -30,7 +28,6 @@
 		SELECT
 			EMAIL,
 			NAME,
-			EMPNO
 		FROM 
 			USER_INFO
 		WHERE 
@@ -49,30 +46,27 @@
 	<!-- 아작스로 로그인 확인 -->
 	<select id="getEmpnoCheck" resultType="UserDTO">
 		SELECT 
-			EMPNO
+			EMAIL
 		FROM
 			USER_INFO
 		WHERE
-			EMPNO=#{empno}
+			EMAIL=#{email}
 	</select>
 
 		<!-- 아이디 비밀번호  -->
 	<select id="getLoginInfo" resultType="UserDTO">
 		SELECT 
-			EMPNO, 
 			PWD, 
 			NAME, 
-			EMAIL,
-			PHONE
+			EMAIL
 		FROM 
 			USER_INFO
 		WHERE 
-			EMPNO=#{empno} AND PWD=#{pwd}
+			EMAIL=#{email} AND PWD=#{pwd}
 	</select>
 	
 	<select id="kakaoLoginForDgService" resultType="KakaoDTO">
 		SELECT  
-			EMPNO, 
 			PWD, 
 			NAME 
 		FROM 
