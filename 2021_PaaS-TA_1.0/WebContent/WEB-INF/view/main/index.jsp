@@ -24,6 +24,9 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="/resources/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/resources/css/fanBatch.css" rel="stylesheet">
+    <link href="/resources/css/modal.css" rel="stylesheet">
+    
 </head>
 <body id="page-top">
     <!-- Page Wrapper -->
@@ -45,6 +48,7 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
+            
             <!-- Divider -->
             <hr class="sidebar-divider">
             <!-- Heading -->
@@ -300,7 +304,6 @@
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
                     </div>
 
-                    
                     <!-- Content Row -->
 
                     <div class="row">
@@ -351,6 +354,8 @@
                                             aria-labelledby="dropdownMenuLink">
                                            <!--   <a class="dropdown-item" onclick="changeFan(1);">동작</a>
                                             <a class="dropdown-item" onclick="changeFan(2);">멈춤</a>-->
+                                            <a class="dropdown-item btn-open-popup" onclick=";">환풍기 배치 설정</a>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -440,6 +445,28 @@
             </div>
         </div>
     </div>
+    
+    <!-- 모달 -->
+    <div class="modal" id="modal_01"> 
+    	<div class="modal_body">
+    		<h2>환풍기 작동 시간 설정</h1>
+    		<div id="fan__data">
+    			<div>
+    				작동 시간 : <input type="text" class="fan__input" id="fan__operating__time" onKeyup="isMaxValue(this);" onKeyPress="isMaxValue(this);"> 분
+    			</div>
+    			<span class="fan__explanation">최대 720분</span>
+    			<div>
+    				휴식 시간 : <input type="text" class="fan__input" id="fan__operating__cycle" onKeyup="isMaxValue(this);" onKeyPress="isMaxValue(this);"> 분
+    			</div>
+    			<span class="fan__explanation">최대 720분</span>
+    		</div>
+    		<div id="fan__buttons">
+	    		<button class="fan__button" id="save__fan__batch" onclick="updateFanSetting();">저장</button>
+	    		<button class="btn-close-popup fan__button">취소</button>    		
+    		</div> 
+    	</div>
+    </div>
+    
     <div id="JSONSensorDataTag"></div> 
 <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    JavaScript 영역    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  -->
     <!-- Bootstrap core JavaScript-->
@@ -460,6 +487,42 @@
 	<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
 	<!-- Chart code -->
 	<script src="/resources/js/customJs/chartScript.js"></script>
+	<script src="/resources/js/customJs/fanBatch.js"></script>
+	<!-- 모달 -->
+	<script>
+	const modal = document.querySelector('#modal_01');
+	const btnOpenPopup = document.querySelector('.btn-open-popup'); 
+	const btnClosePopup = document.querySelector(".btn-close-popup");
+	const updateFanSettingButton = document.querySelector('#save__fan__batch');
+	
+	btnOpenPopup.addEventListener('click', () => { 
+		modal.style.display = 'block'; 
+	});
+	
+	btnClosePopup.addEventListener('click', () => { 
+		modal.style.display = 'none'; 
+	});
+	
+	updateFanSettingButton.addEventListener('click', () => { 
+		modal.style.display = 'none'; 
+	});
+	
+	function isMaxValue(target) {
+		
+		console.log("this:"+target)
+		console.log(target.id)
+		let id = target.id;
+		let value = document.getElementById(id).value;
+		document.getElementById(id).value=value.replace(/[^0-9]/g,'');
+		console.log("value: "+value)
+		if(+value > 720) {
+			event.returnValue=false;
+			document.getElementById(id).value = 720;
+		}
+	}
+	
+	
+	</script>
 <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    JavaScript 영역    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  -->
 </body>
 </html>
