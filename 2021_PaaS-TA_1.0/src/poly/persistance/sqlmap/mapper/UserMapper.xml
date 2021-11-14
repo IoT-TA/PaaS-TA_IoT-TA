@@ -63,7 +63,7 @@
 			PWD, 
 			NAME, 
 			EMAIL,
-			PHONE 
+			PHONE
 		FROM 
 			USER_INFO
 		WHERE 
@@ -80,4 +80,24 @@
 		WHERE 
 			EMAIL=#{kakaoMeail}
 	</select>
+	
+	<!-- email로 사용자의 minutesLine 가져오기 -->
+	<select id="getMinutesLineByEmail" resultType="UserDTO" parameterType="UserDTO">
+		SELECT
+			MINUTES_LINE
+		FROM
+			USER_INFO
+		WHERE
+			EMAIL=#{email}
+	</select>
+	
+	<!-- minutesLine 수정 -->
+	<update id="updateMinutesLine" parameterType="UserDTO">
+		UPDATE 
+			USER_INFO
+		SET 
+			MINUTES_LINE=#{minuteLine}
+		WHERE 
+			EMAIL = #{email}
+	</update>
 </mapper>

@@ -25,4 +25,7 @@ public interface IUserMapper {
 
 	int updateAdminInfo(UserDTO pDTO); // 회원 정보 수정
 	
+	UserDTO getMinutesLineByEmail(UserDTO pDTO); // minutesLIne 가져오기 
+	
+	int updateMinutesLine(UserDTO pDTO); // minutesLine 수정
 }

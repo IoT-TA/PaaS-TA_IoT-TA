@@ -119,14 +119,14 @@ public class MongoMapper implements IMongoMapper {
 	@Override
 	public List<MongoDTO> getSensorDataMatch(List<MongoDTO> pList) throws Exception {
 		log.info("getSensorDataMatch Start");
-		Map<String, String> sensorMap = new HashMap<String, String>(); // 센서 1, 2, 3의 데이터를 받아올 맵 객체
+		Map<String, String> sensorMap = new HashMap<>(); // 센서 1, 2, 3의 데이터를 받아올 맵 객체
 		DBCollection collection = mongodb.getCollection("schemas");
 
 		BasicDBObject query = null;
 		BasicDBObject projection = null;
 		MongoDTO mongDTO = null;
 
-		List<MongoDTO> mongoData = new ArrayList<MongoDTO>();
+		List<MongoDTO> mongoData = new ArrayList<>();
 		//---------------------------------데이터 key value 매핑---------------------------------------
 		for (MongoDTO e : pList) {
 			sensorMap.put(e.getSENSOR_NUMBER(), e.getDate());
@@ -136,7 +136,7 @@ public class MongoMapper implements IMongoMapper {
 			int sNum = 1;
 			Iterator<MongoDTO> it = pList.iterator();
 			while (it.hasNext()) {
-				//log.info(it.next());
+				log.info(it.next());
 				query = new BasicDBObject();
 				String str = sNum + ""; // 형변환
 				query.put("date", sensorMap.get(str));
@@ -160,6 +160,8 @@ public class MongoMapper implements IMongoMapper {
 					
 					mongDTO.setSENSOR_NUMBER(current.get("SENSOR_NUMBER").toString());
 					mongDTO.setSENSOR_DATA(current.get("SENSOR_DATA").toString());
+					
+					mongDTO.setDate(current.get("date").toString());
 					
 					log.info("mongDTO.getSENSOR_NUMBER : " + mongDTO.getSENSOR_NUMBER());
 					log.info("mongDTO.getSENSOR_DATA: " + mongDTO.getSENSOR_DATA());
