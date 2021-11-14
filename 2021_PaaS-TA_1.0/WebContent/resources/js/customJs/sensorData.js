@@ -39,8 +39,8 @@
 	        url : '/sensor/getAsyncSensorData.do', 
 	        type : 'GET', 
 	        success : function (data) { // 데이터 형식 : {"1" : data, "2" : data, "3" : data}
-	            // $('JSONSensorDataTag').data('JSONSensorData', data); 
-	            // => dataset 함수를 활용한 제이쿼리를 사용한 도큐먼트 데이터 저장방법
+				localStorage.clear(); //=> 메모리를 모두 비운 후 
+	        	localStorage.setItem("sensorOBJ", JSON.stringify(data)); // => JS 단에서 데이터 통신을 위한 저장
 	            resFan = initModal(data, limit); // => 모달을 띄우기 위한 함수 실행, fan 이미지컨트롤
 	            console.log("resFan : " + resFan); // => 성공 유무 확인용 로그
 	            changeFan(resFan); // => 1이면 동작 나머지는 멈춤
