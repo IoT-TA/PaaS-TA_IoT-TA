@@ -1,110 +1,393 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
-<html lang="en">
-<meta property="og:image" content="https://code-study.tistory.com/images/img_share.png">
+<html>
 <head>
-<%@ include file="/WEB-INF/view/user/bootTop.jsp"%>
-<title>DetectionGas</title>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="Landing PAGE Html5 Template">
+
+    <meta name="keywords" content="landing,startup,flat">
+
+    <meta name="author" content="Made By GN DESIGNS">
+
+
+    <title>2021YPaasTA_IoTTA</title>
+
+
+    <!-- // PLUGINS (css files) // -->
+
+    <link href="/resources/assets/js/plugins/bootsnav_files/skins/color.css" rel="stylesheet">
+
+    <link href="/resources/assets/js/plugins/bootsnav_files/css/animate.css" rel="stylesheet">
+
+    <link href="/resources/assets/js/plugins/bootsnav_files/css/bootsnav.css" rel="stylesheet">
+
+    <link href="/resources/assets/js/plugins/bootsnav_files/css/overwrite.css" rel="stylesheet">
+
+    <link href="/resources/assets/js/plugins/owl-carousel/owl.carousel.css" rel="stylesheet">
+
+    <link href="/resources/assets/js/plugins/owl-carousel/owl.theme.css" rel="stylesheet">
+
+    <link href="/resources/assets/js/plugins/owl-carousel/owl.transitions.css" rel="stylesheet">
+
+    <link href="/resources/assets/js/plugins/Magnific-Popup-master/Magnific-Popup-master/dist/magnific-popup.css" rel="stylesheet">
+
+    <!--// ICONS //-->
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!--// BOOTSTRAP & Main //-->
+
+    <link href="/resources/assets/bootstrap-3.3.7/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/resources/assets/css/main.css" rel="stylesheet">
+
 </head>
-<body class="bg-gradient-primary">
-    <div class="container">
-        <!-- Outer Row -->
-        <div class="row justify-content-center">
-            <div class="col-xl-10 col-lg-12 col-md-9">
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4"><img src="/resources/image/Logo.png" style="width:40px"> GASGASGAS</h1>
-                                    </div>
-	                                    <form class="user" action="/user/userLoginProc.do" name="formTag" onsubmit="return doLoginCheck(this);">
-	                                        <div class="form-group">
-	                                            <input type="text" class="form-control form-control-user"
-	                                                id="empno" name ='empno' aria-describedby="emailHelp"
-	                                                placeholder="ÏÇ¨ÏõêÎ≤àÌò∏Î•º ÏûÖÎ†•ÌïòÏÑ∏Ïöî.">
-	                                        </div>
-	                                        <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ÏßÅÏõê Îì±Î°ù Ïó¨Î∂Ä ÌôïÏù∏ÎùÑÏõåÏ£ºÎäî Ïä§Ìåü@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
-	                                        <div id='empno_check'></div>
-	                                        <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
-	                                        <div class="form-group">
-	                                            <input type="password" class="form-control form-control-user"
-	                                                id="pwd" name='pwd' placeholder="ÎπÑÎ∞ÄÎ≤àÌò∏Î•º ÏûÖÎ†•ÌïòÏÑ∏Ïöî.">
-	                                        </div>
-	                                        <div class="form-group">
-	                                            <div class="custom-control custom-checkbox small">
-	                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-	                                      <!--  <label class="custom-control-label" for="customCheck">ÏïÑÏù¥Îîî Í∏∞ÏñµÌïòÍ∏∞</label> -->
-	                                            </div>
-	                                        </div>
-	                                        <button class="btn btn-primary btn-user btn-block" id="loginSubmit" >Î°úÍ∑∏Ïù∏</button>
-	                                        <!-- Ïπ¥Ïπ¥Ïò§ Î°úÍ∑∏Ïù∏ kakaoLoginProc-->
-	                                  		<button type="button" 
-	                                      		class="btn btn-primary1 btn-user btn-block" value="Ïπ¥Ïπ¥Ïò§Î°úÍ∑∏Ïù∏" onclick="location.href='/kakaoLoginProc.do'" style="background-color:#F8DF00;  
-	                                      		 padding-top: 3px; padding-bottom: 3px;">
-	                                      		<img src="/resources/image/kakao.png" style="width:40px">
-	                                  		     Ïπ¥Ïπ¥Ïò§Î°úÍ∑∏Ïù∏     	
-	                                       </button> 
-	                                    </form>
-                                    <hr> 	
-                                    <div class="text-center">
-                                        <a class="small" href="/user/findPassword.do">ÎπÑÎ∞ÄÎ≤àÌò∏ Ï∞æÍ∏∞</a>
-                                    </div>
-                                    <div class="text-center">
-                                        <a class="small" href="/user/regUserPage.do">ÌöåÏõêÍ∞ÄÏûÖ</a>
-                                    </div>
-                                </div>
-                            </div>
+<body>
+
+    <!--======================================== 
+
+           Preloader
+
+    ========================================-->
+
+    <div class="page-preloader">
+
+        <div class="spinner">
+
+            <div class="rect1"></div>
+
+            <div class="rect2"></div>
+
+            <div class="rect3"></div>
+
+            <div class="rect4"></div>
+
+            <div class="rect5"></div>
+
+        </div>
+
+    </div>
+
+    <!--======================================== 
+
+           Header
+
+    ========================================-->
+
+    <!--//** Navigation**//-->
+
+    <nav class="navbar navbar-default navbar-fixed white no-background bootsnav navbar-scrollspy" data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000">
+
+        <div class="container">
+
+            <!-- Start Header Navigation -->
+
+            <div class="navbar-header">
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+
+                    <i class="fa fa-bars"></i>
+
+                </button>
+
+  <!--               <a class="navbar-brand" href="#brand">
+
+                    <img src="/resources/assets/img/logo.png" class="logo" alt="logo">
+
+                </a> -->
+
+            </div>
+
+            <!-- End Header Navigation -->
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+
+            <div class="collapse navbar-collapse" id="navbar-menu">
+
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li class="button-holder">
+
+                        <button type="button" class="btn btn-blue navbar-btn" data-toggle="modal" data-target="#SignIn">∑Œ±◊¿Œ</button>
+                        <button type="button" class="btn btn-blue navbar-btn" onclick="location.href='/kakaoLoginProc.do'" 
+                        		style="background-color:#F8DF00; padding-top: 3px; padding-bottom: 3px;">
+                                <img src="/resources/image/kakao.png" style="width:40px"> KaKao∑Œ±◊¿Œ
+                        </button>
+
+                    </li>
+
+                </ul>
+
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+
+    </nav>
+
+    <!--//** Banner**//-->
+
+    <section id="home">
+
+        <div class="container">
+
+            <div class="row">
+
+                <!-- Introduction -->
+
+                <div class="col-md-6 caption">
+
+                    <h1>Paas-TA±‚π›¿«</h1>
+                    <h1>æ∆µŒ¿Ã≥Î∏¶ »∞øÎ«—</h1> 
+                    <h1>ƒ⁄∑Œ≥™ ∞®ø∞ øππÊ Ω√Ω∫≈€</h1>
+
+                    <h2>
+
+                           IoT-TA  
+
+                            <span class="animated-text"></span>
+
+                            <span class="typed-cursor"></span>
+
+                        </h2>
+
+                    <!-- <a href="#" class="btn btn-transparent">Get Started</a> -->
+                    <!-- <a class="btn btn-blue popup-youtube" href="https://www.youtube.com/watch?v=Q8TXgCzxEnw"> -->
+
+                </div>
+
+                <!-- Sign Up -->
+
+                <div class="col-md-5 col-md-offset-1">
+
+                    <form class="signup-form" name="f" action="/user/regUserInfo.do" onsubmit="return doRegUserInfoCheck(this);">
+
+                        <h2 class="text-center">»∏ø¯∞°¿‘</h2>
+
+                        <hr>
+
+                        <div class="form-group">
+
+                            <input type="email" class="form-control" placeholder="¿Ã∏ﬁ¿œ" required="required" id="email" name ="email">
+
                         </div>
-                    </div>
+                        
+	                    <!-- ¡˜ø¯ ¡ﬂ∫π µÓ∑œ ø©∫Œ »Æ¿Œ -->
+	                    <div id='email_check'></div>
+	                    
+	                    
+                        <div class="form-group">
+
+                            <input type="password" class="form-control" placeholder="∫Òπ–π¯»£" required="required" id="password" name ="password">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <input type="password" class="form-control" placeholder="∫Òπ–π¯»£ »Æ¿Œ" required="required" id="password2" name ="password2">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <input type="text" class="form-control" placeholder="»ﬁ¥Î¿¸»≠π¯»£" required="required" id="phone" name ="phone">
+
+                        </div>
+
+                        <div class="form-group text-center">
+
+                            <button type="submit" class="btn btn-blue btn-block" id="regUserInfoButton">∞°¿‘ øœ∑·</button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!--======================================== 
+
+           Footer
+
+    ========================================-->
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="footer-caption">
+                    <hr>
+                    <h5 class="pull-left">OpenPaas, &copy;2021PaasTA IoT TA</h5>
                 </div>
             </div>
         </div>
+    </footer>
+
+    <!--======================================== 
+
+           Modal
+
+    ========================================-->
+
+    <!-- Modal -->
+
+    <div class="modal fade" id="SignIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+        <div class="modal-dialog" role="document">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                    <h4 class="modal-title text-center" id="myModalLabel">∑Œ±◊¿Œ ¡§∫∏ ¿‘∑¬</h4>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <form class="signup-form" action="/user/userLoginProc.do">
+
+                        <div class="form-group">
+
+                            <input type="text" class="form-control" placeholder="ªÁøÎ¿⁄æ∆¿Ãµ" required="required" id="loginEmail" name="loginEmail">
+
+                        </div>
+                        
+                        
+<div id="loginEmail_check"></div>
+
+
+                        <div class="form-group">
+
+                            <input type="text" class="form-control" placeholder="∫Òπ–π¯»£" required="required" id="loginPassword" name="loginPassword">
+
+                        </div>
+
+                        <div class="form-group text-center">
+
+                            <button type="submit" class="btn btn-blue btn-block" id="loginSubmit">∑Œ±◊¿Œ</button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <div class="modal-footer text-center">
+
+                    <a href="/user/findPassword.do">∫Òπ–π¯»£ √£±‚ /</a>
+
+                    <a href="#">»∏ø¯∞°¿‘</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
-<!--################################################################################# Ïú†Ï†Ä ÏïÑÏù¥Îîî ÌôïÏù∏Ïö© ÏïÑÏûëÏä§ Ïä§ÌÅ¨Î¶ΩÌä∏ ÏòÅÏó≠ #####################################################################-->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/resources/assets/bootstrap-3.3.7/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    <script src="/resources/assets/js/plugins/owl-carousel/owl.carousel.min.js"></script>
+
+    <script src="/resources/assets/js/plugins/bootsnav_files/js/bootsnav.js"></script>
+
+    <script src="/resources/assets/js/plugins/typed.js-master/typed.js-master/dist/typed.min.js"></script>
+
+    <script src="/resources/assets/js/plugins/Magnific-Popup-master/Magnific-Popup-master/dist/jquery.magnific-popup.js"></script>
+
+    <script src="/resources/assets/js/main.js"></script>
+    
+<!-- ====================================== ¿Œ¡ı∏ﬁ¿œ »Æ¿Œ ====================================== -->
+    <script type="text/javascript">
+	    function doRegUserInfoCheck(f) {
+			if (f.email.value.trim()==""){
+				alert("¿Ã∏ﬁ¿œ¿ª ¿‘∑¬«œººø‰.");
+				f.email.focus();
+				return false;
+			}
+			if (f.password.value.trim()==""){
+				alert("∫Òπ–π¯»£∏¶ ¿‘∑¬«œººø‰.");
+				f.password.focus();
+				return false;
+			}
+			if (password.value.trim() != password2.value) {
+				alert("∫Òπ–π¯»£∞° º≠∑Œ ¥Ÿ∏®¥œ¥Ÿ.");
+				f.password.focus();
+				return false;
+			}
+			if (phone.value.trim() = "") {
+				alert("¿¸»≠π¯»£∏¶ ¿‘∑¬«ÿ¡÷ººø‰");
+				f.phone.focus();
+				return false;
+			}
+		}
+    </script>
+<!-- ====================================== ¿Ã∏ﬁ¿œ µÓ∑œø©∫Œ »Æ¿ŒøÎ æ∆¿€Ω∫ =========================================== -->
    <script type="text/javascript">
-   //--------------------Ïú†Ï†Ä Í∞ÄÏûÖ Ïó¨Î∂Ä ÌôïÏù∏ AJAX Ï≤òÎ¶¨ -----------------------------------------
-   $('#empno').blur(function () // => Ï†úÏù¥ÏøºÎ¶¨ ÏÑ†ÌÉùÏù¥ Ìï¥Ï†ú ÎêòÎ©¥ Ìï®ÏàòÍ∞Ä ÎèôÏûë
+   $('#email').blur(function () {
+		var empno = $('#email').val();
+		$.ajax({
+			url : '/user/loginEmpnoCheck.do?empno=' + empno, // => ø©±‚ ¿Ã∏ﬁ¿œ∑Œ ºˆ¡§«œ±‚
+			type : 'get',
+			dataType : 'text',
+			success : function (data) {
+				if(data == 0){
+					$('#email_check').text('¿ÃªÛæ¯Ω¿¥œ¥Ÿ.');
+					$('#email_check').css('color', 'blue');
+					$('#regUserInfoButton').attr('disabled', false);
+				}else if(data == 1){
+					$('#email_check').text('¿ÃπÃ µÓ∑œµ» ªÁøÎ¿⁄∞° ¿÷Ω¿¥œ¥Ÿ.');
+					$('#email_check').css('color', 'red');
+					$('#regUserInfoButton').attr('disabled', true);
+					document.getElementById("empno").focus();
+				}
+			}
+		})
+	});
+  	</script>
+<!--  ∑Œ±◊¿Œ Ω√ ¿Ø¿˙ æ∆¿Ãµ »Æ¿ŒøÎ æ∆¿€Ω∫ Ω∫≈©∏≥∆Æ øµø™-->
+   <script type="text/javascript">
+   //--------------------¿Ø¿˙ ∞°¿‘ ø©∫Œ »Æ¿Œ AJAX √≥∏Æ -----------------------------------------
+   $('#loginEmail').blur(function () // => ¡¶¿Ãƒı∏Æ º±≈√¿Ã «ÿ¡¶ µ«∏È «‘ºˆ∞° µø¿€
 	{
-	  //--------------------idÍ∞Ä empnoÏù∏ Í∞íÏùÑ Í∞ÄÏ†∏ÏôÄ Îã¥ÎäîÎã§.------------------------------------ 
-      var empno = $('#empno').val(); // => Ïª®Ìä∏Î°§Îü¨Î°ú Í∞ôÏù¥ Î≥¥ÎÇº Îç∞Ïù¥ÌÑ∞
+	  //--------------------id∞° empno¿Œ ∞™¿ª ∞°¡ÆøÕ ¥„¥¬¥Ÿ.------------------------------------ 
+      var empno = $('#loginEmail').val(); // => ƒ¡∆Æ∑—∑Ø∑Œ ∞∞¿Ã ∫∏≥æ µ•¿Ã≈Õ
       //----------------------------------------------------------------------------------------
       $.ajax({
-         url : '/user/loginEmpnoCheck.do?empno=' + empno,
+         url : '/user/loginEmpnoCheck.do?empno=' + empno, //=> ¿Ã∏ﬁ¿œ∑Œ ºˆ¡§«œ±‚
          type : 'get',
          dataType : 'text',
          success : function (data) {
             if(data == 0){
-               $('#empno_check').text('ÏÇ¨ÏõêÎ≤àÌò∏Î•º ÌôïÏù∏Ìï¥Ï£ºÏÑ∏Ïöî');
-               $('#empno_check').css('color', 'red');
+               $('#loginEmail_check').text('¿Ã∏ﬁ¿œ¿ª »Æ¿Œ«ÿ¡÷ººø‰');
+               $('#loginEmail_check').css('color', 'red');
                $('#loginSubmit').attr('disabled', true);
             }else if(data == 1){
-               $('#empno_check').text('Îì±Î°ùÎêú ÏßÅÏõêÏûÖÎãàÎã§.');
-               $('#empno_check').css('color', 'blue');
+               $('#loginEmail_check').text('µÓ∑œµ» ¡˜ø¯¿‘¥œ¥Ÿ.');
+               $('#loginEmail_check').css('color', 'blue');
                $('#loginSubmit').attr('disabled', false);
             }
          }
       })
    });
-   //--------------------------------------- null Ï≤¥ÌÅ¨ -------------------------------------------
-  	function doLoginCheck(formTag)
-   {
-	   if(empno.value == "")
-	   {
-		   alert("ÏïÑÏù¥ÎîîÎ•º ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî.");
-		   formTag.empno.focus();
-		   return false;
-	   }
-	   if(pwd.value == "")
-	   {
-		   alert("ÎπÑÎ∞ÄÎ≤àÌò∏Î•º ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî.");
-		   formTag.pwd.focus();
-		   return false;
-	   }
-   }
-     </script>   
+     </script>
 </body>
 </html>
