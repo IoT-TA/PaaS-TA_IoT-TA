@@ -16,8 +16,9 @@ public class UserDTO { // => 클래스 이름이 mapper.xml의 resulttype 임
 	private String empno; // => 아이디	
 	private String pwd;   // => 비번
 	private String name;  // => 이름
-	private String email; // => 이름
-	private String phone; // => 이름
+	private String email; // => 이메일
+	private String phone; // => 연락처
+	private String minutesLine; // => '순환주기(분) 가동시간(분)'  
 	//---------------------------------Get, Set ----------------------------------------------
 	public String getEmpno() {
 		return empno;
@@ -49,4 +50,16 @@ public class UserDTO { // => 클래스 이름이 mapper.xml의 resulttype 임
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	public String getMinutesLine() {
+		return minutesLine;
+	}
+	public void setMinutesLine(String minutesLine) {
+		this.minutesLine = minutesLine;
+	}
+	@Override
+	public String toString() {
+		return "UserDTO [empno=" + empno + ", pwd=" + pwd + ", name=" + name + ", email=" + email + ", phone=" + phone
+				+ ", minutesLine=" + minutesLine + "]";
+	}
+	
 }

@@ -5,7 +5,18 @@
         http://www.springframework.org/schema/jdbc  http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd">
 	
 	                              	 <!-- ctrl + shift \ 전체 주석 해제 -->
-    <bean id="dataSource"
+	 <!-- Paas-TA mySQL db data Source-->
+   <bean id="dataSource"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+        <property name="url"
+            value="jdbc:mysql://127.0.0.1:9000/cf_97573d8d_6e39_4fcc_a71c_117a1671da15">
+        </property>
+        <property name="username" value="rjhqYF8qSngWn0rj" /> 
+        <property name="password" value="Q8aNwKTrjruYwWJV" />
+    </bean>  
+	                              	 
+<!--     <bean id="dataSource"
         class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.mariadb.jdbc.Driver"></property>
         <property name="url"
@@ -13,7 +24,7 @@
         </property>
         <property name="username" value="CHOI" /> 
         <property name="password" value="Choi01!" />
-    </bean>      
+    </bean>     -->  
 	
     <!-- oracle Connection Pool -->
 <!--     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"

@@ -93,4 +93,20 @@ public class UserService implements IUserService{
 		}
 		return res; 
 	}
+	@Override
+	public UserDTO getMinutesLineByEmail(UserDTO pDTO) {
+		log.info(this.getClass().getName()+"getMinutesLineByEmail Start!");
+		log.info("pDTO : "+pDTO);
+		log.info(this.getClass().getName()+"getMinutesLineByEmail End!");
+		return userMapper.getMinutesLineByEmail(pDTO);
+	}
+	@Override
+	public int updateMinutesLine(UserDTO pDTO) {
+		int success = userMapper.updateMinutesLine(pDTO);
+		int res = 0;
+		if (success == 1) {
+			res = 1;
+		}
+		return res;
+	}
 }

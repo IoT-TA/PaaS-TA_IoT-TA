@@ -19,5 +19,7 @@ public interface IUserService {
 
 	int updateAdminInfo(UserDTO pDTO); // 비밀번호 변경
 
-
+	UserDTO getMinutesLineByEmail(UserDTO pDTO); // minutesLIne 가져오기 
+	
+	int updateMinutesLine(UserDTO pDTO); // minutesLine 수정
 }
