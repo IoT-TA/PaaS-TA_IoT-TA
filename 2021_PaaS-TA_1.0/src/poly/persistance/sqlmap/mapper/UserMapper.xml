@@ -90,7 +90,7 @@
 		UPDATE 
 			USER_INFO
 		SET 
-			MINUTES_LINE=#{minuteLine}
+			MINUTES_LINE=#{minutesLine}
 		WHERE 
 			EMAIL = #{email}
 	</update>

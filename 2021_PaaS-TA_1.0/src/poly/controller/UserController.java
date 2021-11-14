@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import poly.dto.MailDTO;
@@ -334,13 +335,18 @@ public class UserController {
 	}
 	
 	// 사용자의 minutesLine 수정 
-	@RequestMapping(value="/user/updateMinutesLine")
-	public ResponseEntity<Integer> updateMinutesLine(HttpServletRequest request) {
+	@RequestMapping(value="/user/updateMinutesLine", method = RequestMethod.POST)
+	public ResponseEntity<Integer> updateMinutesLine(HttpServletRequest request, HttpSession session) {
 		log.info(this.getClass().getName()+"-----------------------------------updateMinutesLine start!!-----------------------------------------");
+		
+		log.info("minutesLine : "+request.getParameter("minutesLine"));
 		
 		UserDTO pDTO = new UserDTO();
 		pDTO.setMinutesLine(CmmUtil.nvl(request.getParameter("minutesLine")));
+		pDTO.setEmail((String)session.getAttribute("email"));
+		log.info("pDTO : "+pDTO);
 		int res = userService.updateMinutesLine(pDTO);
+		
 		
 		log.info(this.getClass().getName()+"----------------------------------updateMinutesLine end!!-----------------------------");
 		return ResponseEntity.status(HttpStatus.OK).body(res);

@@ -24,6 +24,9 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="/resources/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/resources/css/fanBatch.css" rel="stylesheet">
+    <link href="/resources/css/modal.css" rel="stylesheet">
+    
 </head>
 <body id="page-top">
     <!-- Page Wrapper -->
@@ -32,10 +35,10 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/main/index.do">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">GASGASGAS</div>
+<!--                 <div class="sidebar-brand-icon">
+                    <img src="/resources/img/logo.png" width="40px">
+                </div> -->
+                <div class="sidebar-brand-text mx-3">IoT-TA</div>
             </a>
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
@@ -45,6 +48,7 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
+            
             <!-- Divider -->
             <hr class="sidebar-divider">
             <!-- Heading -->
@@ -69,11 +73,11 @@
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
+           <!--  <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>테이블</span>
+                     <span>테이블</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
@@ -84,13 +88,13 @@
                         <a class="collapse-item" href="/table/weeks.do">주간보기</a>
                     </div>
                 </div>
-            </li>
+            </li> -->
 
             <!-- Heading -->
-            <div class="sidebar-heading">
+<!--             <div class="sidebar-heading">
                 개인
             </div>
-
+ -->
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
@@ -103,8 +107,8 @@
                         <h6 class="collapse-header">Login Screens:</h6>
                         <a class="collapse-item" href="/user/userLogin.do">로그인</a>
                         <a class="collapse-item" href="/user/logOut.do">로그아웃</a>
-                        <a class="collapse-item" href="sensor.do">센서등록</a>
-                        <a class="collapse-item" href="sensorinsert.do">센서추가</a>
+                        <a class="collapse-item" href="sensor.do">센서등록/추가</a>
+                        <a class="collapse-item" id="updateLimitPop" onclick="updateLimitPopup();">임계값수정</a>
                 </div>
             </li>
 
@@ -151,15 +155,15 @@
                             </div>
                         </li>
 
-                        <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
+                        <!-- Nav Item - Alerts 메시지 알림 표시 태그들 사용하지 않아 주석-->
+                       <!--  <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
-                                <!-- Counter - Alerts -->
+                                Counter - Alerts
                                 <span class="badge badge-danger badge-counter">3+</span>
                             </a>
-                            <!-- Dropdown - Alerts -->
+                            Dropdown - Alerts
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header">
@@ -200,7 +204,7 @@
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
                             </div>
-                        </li>
+                        </li> -->
 
                         <!-- Nav Item - Messages -->
                         <li class="nav-item dropdown no-arrow mx-1">
@@ -300,7 +304,6 @@
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
                     </div>
 
-                    
                     <!-- Content Row -->
 
                     <div class="row">
@@ -336,7 +339,7 @@
                             </div>
                         </div>
 <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Pie Chart @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
-                        <div class="col-4">
+                        <div class="col-xl-4 col-md-12 mb-6">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div
@@ -351,12 +354,14 @@
                                             aria-labelledby="dropdownMenuLink">
                                            <!--   <a class="dropdown-item" onclick="changeFan(1);">동작</a>
                                             <a class="dropdown-item" onclick="changeFan(2);">멈춤</a>-->
+                                            <a class="dropdown-item btn-open-popup" onclick=";">환풍기 배치 설정</a>
+                                            
                                         </div>
                                     </div>
                                 </div>
 <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 휀 이미지 Card Body @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
                                 <div class="card-body">
-                                    <img id="fanImg" class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem; height: 17.5rem;" 
+                                    <img id="fanImg" class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 100%; height: 17.5rem;" 
                                     	src="/resources/img/stopped-fan.png" alt="..."> 
                                     	
                                 </div>
@@ -366,35 +371,24 @@
 <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 센서 차트 영역 시작 Content Row @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
 					<div class="row">
 <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ < 센서 1 > @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
-						<div class="col-xl-4 col-md-6 mb-4">
+						<div class="col-xl-6 col-md-6 mb-6">
 							<div class="card border-left-primary shadow h-100 py-2">
 								<div class="card-body">
 									<div>
-										<h4>센서 1</h4>
+										<h4>CO2 센서 1</h4>
 									</div>
-									<div id="chartdiv2" style="height: 100%"></div>
+									<div id="chartdiv1" style="height: 250px" style="width: 100%"></div>
 								</div>
 							</div>
 						</div>
 <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ < 센서 2 > @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
-						<div class="col-xl-4 col-md-6 mb-4">
+						<div class="col-xl-6 col-md-6 mb-6">
 							<div class="card border-left-primary shadow h-100 py-2">
 								<div class="card-body">
 									<div>
-										<h4>센서 2</h4>
+										<h4>CO2 센서 2</h4>
 									</div>
-									<div id="chartdiv3" style="height: 100%"></div>
-								</div>
-							</div>
-						</div>
-<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ < 센서 3 > @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
-						<div class="col-xl-4 col-md-6 mb-4">
-							<div class="card border-left-primary shadow h-100 py-2">
-								<div class="card-body">
-									<div>
-										<h4>센서3</h4>
-									</div>
-									<div id="chartdiv4" style="height: 100%"></div>
+									<div id="chartdiv2" style="height: 250px" style="height: 100%"></div>
 								</div>
 							</div>
 						</div>
@@ -408,7 +402,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; GASGASGAS 2021</span>
+                        <span>OpenPaas &copy; IoT-TA 2021</span>
                     </div>
                 </div>
             </footer>
@@ -440,6 +434,28 @@
             </div>
         </div>
     </div>
+    
+    <!-- 모달 -->
+    <div class="modal" id="modal_01"> 
+    	<div class="modal_body">
+    		<h2>환풍기 작동 시간 설정</h1>
+    		<div id="fan__data">
+    			<div>
+    				작동 시간 : <input type="text" class="fan__input" id="fan__operating__time" onKeyup="isMaxValue(this);" onKeyPress="isMaxValue(this);"> 분
+    			</div>
+    			<span class="fan__explanation">최대 720분</span>
+    			<div>
+    				휴식 시간 : <input type="text" class="fan__input" id="fan__operating__cycle" onKeyup="isMaxValue(this);" onKeyPress="isMaxValue(this);"> 분
+    			</div>
+    			<span class="fan__explanation">최대 720분</span>
+    		</div>
+    		<div id="fan__buttons">
+	    		<button class="fan__button" id="save__fan__batch" onclick="updateFanSetting();">저장</button>
+	    		<button class="btn-close-popup fan__button">취소</button>    		
+    		</div> 
+    	</div>
+    </div>
+    
     <div id="JSONSensorDataTag"></div> 
 <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    JavaScript 영역    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  -->
     <!-- Bootstrap core JavaScript-->
@@ -449,17 +465,53 @@
     <script src="/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="/resources/js/sb-admin-2.min.js"></script>
-    <!-- Page level plugins -->
- 	<!--<script src="/resource/vendor/chart.js/Chart.min.js"></script>
-    <script src="/resource/js/demo/chart-area-demo.js"></script>
-    <script src="/resource/js/demo/chart-pie-demo.js"></script> -->
-    
+	<!-- 각 센서 별 데이터 차트 사용을 위한 js 임포트 -->
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/radar.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
 	<!--amChart 리소스  -->
 	<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
 	<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
 	<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
 	<!-- Chart code -->
 	<script src="/resources/js/customJs/chartScript.js"></script>
+	<script src="/resources/js/customJs/fanBatch.js"></script>
+	<!-- 모달 -->
+	<script>
+	const modal = document.querySelector('#modal_01');
+	const btnOpenPopup = document.querySelector('.btn-open-popup'); 
+	const btnClosePopup = document.querySelector(".btn-close-popup");
+	const updateFanSettingButton = document.querySelector('#save__fan__batch');
+	
+	btnOpenPopup.addEventListener('click', () => { 
+		modal.style.display = 'block'; 
+	});
+	
+	btnClosePopup.addEventListener('click', () => { 
+		modal.style.display = 'none'; 
+	});
+	
+	updateFanSettingButton.addEventListener('click', () => { 
+		modal.style.display = 'none'; 
+	});
+	
+	function isMaxValue(target) {
+		
+		console.log("this:"+target)
+		console.log(target.id)
+		let id = target.id;
+		let value = document.getElementById(id).value;
+		document.getElementById(id).value=value.replace(/[^0-9]/g,'');
+		console.log("value: "+value)
+		if(+value > 720) {
+			event.returnValue=false;
+			document.getElementById(id).value = 720;
+		}
+	}
+	
+	
+	</script>
 <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    JavaScript 영역    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  -->
 </body>
 </html>
